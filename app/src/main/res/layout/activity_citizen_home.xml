@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="25dp"
+    android:gravity="center"
+    tools:context=".CitizenHomeActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CITIZEN HOME"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to CivicConnect"
+        android:textSize="17sp"
+        android:layout_marginBottom="35dp" />
+
+    <Button
+        android:id="@+id/reportButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="REPORT AN ISSUE"
+        android:textSize="17sp"
+        android:layout_marginBottom="15dp" />
+
+    <Button
+        android:id="@+id/myComplaintsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MY COMPLAINTS"
+        android:textSize="17sp"
+        android:layout_marginBottom="15dp" />
+
+    <Button
+        android:id="@+id/trackButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TRACK COMPLAINT"
+        android:textSize="17sp"
+        android:layout_marginBottom="15dp" />
+
+</LinearLayout>

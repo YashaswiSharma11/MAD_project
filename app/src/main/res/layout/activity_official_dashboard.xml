@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OfficialDashboardActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="CIVICCONNECT"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="OFFICIAL DASHBOARD"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginBottom="25dp" />
+
+        <TextView
+            android:id="@+id/totalTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Total Complaints: 124"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:padding="15dp" />
+
+        <TextView
+            android:id="@+id/pendingTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pending: 32"
+            android:textSize="20sp"
+            android:padding="15dp" />
+
+        <TextView
+            android:id="@+id/progressTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="In Progress: 41"
+            android:textSize="20sp"
+            android:padding="15dp" />
+
+        <TextView
+            android:id="@+id/resolvedTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Resolved: 51"
+            android:textSize="20sp"
+            android:padding="15dp" />
+
+        <TextView
+            android:id="@+id/highPriorityTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="High Priority: 17"
+            android:textSize="20sp"
+            android:padding="15dp"
+            android:layout_marginBottom="20dp" />
+
+        <Button
+            android:id="@+id/viewComplaintsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VIEW ALL COMPLAINTS"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/categoriesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="LOCATION ANALYSIS"
+            android:layout_marginBottom="12dp" />
+
+        <Button
+            android:id="@+id/analyticsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ANALYTICS" />
+
+    </LinearLayout>
+
+</ScrollView>
