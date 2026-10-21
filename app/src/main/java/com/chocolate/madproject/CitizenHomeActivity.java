@@ -25,7 +25,7 @@ public class CitizenHomeActivity extends AppCompatActivity {
         reportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent new Intent(CitizenHomeActivity.this, CategoryActivity.class);
+                Intent intent = new Intent(CitizenHomeActivity.this, CategoryActivity.class);
                 startActivity(intent);
             }
         });

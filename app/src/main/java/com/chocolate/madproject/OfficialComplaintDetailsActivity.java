@@ -131,7 +131,7 @@ public class OfficialComplaintDetailsActivity extends AppCompatActivity {
         Cursor cursor=db.getAllComplaints();
 
         while (cursor.moveToNext()) {
-            int id=cursor.getInt(cursor.getColumnIndexOrThrow("id");
+            int id=cursor.getInt(cursor.getColumnIndexOrThrow("id"));
 
             if (id == complaintId) {
                 String category=cursor.getString(cursor.getColumnIndexOrThrow("category"));

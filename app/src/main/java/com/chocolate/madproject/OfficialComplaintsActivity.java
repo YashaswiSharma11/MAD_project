@@ -89,7 +89,7 @@ public class OfficialComplaintsActivity extends AppCompatActivity {
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                         int complaintId=complaintIds.get(position);
-                        Intent intent=newIntent(OfficialComplaintsActivity.this, OfficialComplaintDetailsActivity.class);
+                        Intent intent=new Intent(OfficialComplaintsActivity.this, OfficialComplaintDetailsActivity.class);
                         intent.putExtra("complaint_id", complaintId);
                         startActivity(intent);
                     }
