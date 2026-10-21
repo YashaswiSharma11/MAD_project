@@ -18,19 +18,14 @@ public class CitizenHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_citizen_home);
 
-        reportButton = findViewById(R.id.reportButton);
-        myComplaintsButton = findViewById(R.id.myComplaintsButton);
-        trackButton = findViewById(R.id.trackButton);
+        reportButton=findViewById(R.id.reportButton);
+        myComplaintsButton=findViewById(R.id.myComplaintsButton);
+        trackButton=findViewById(R.id.trackButton);
 
         reportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(
-                        CitizenHomeActivity.this,
-                        CategoryActivity.class
-                );
-
+                Intent intent new Intent(CitizenHomeActivity.this, CategoryActivity.class);
                 startActivity(intent);
             }
         });
@@ -39,11 +34,7 @@ public class CitizenHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(
-                        CitizenHomeActivity.this,
-                        MyComplaintsActivity.class
-                );
-
+                Intent intent=new Intent(CitizenHomeActivity.this, MyComplaintsActivity.class);
                 startActivity(intent);
             }
         });
@@ -53,11 +44,7 @@ public class CitizenHomeActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent = new Intent(
-                                CitizenHomeActivity.this,
-                                TrackComplaintActivity.class
-                        );
-
+                        Intent intent=new Intent(CitizenHomeActivity.this, TrackComplaintActivity.class);
                         startActivity(intent);
                     }
                 }

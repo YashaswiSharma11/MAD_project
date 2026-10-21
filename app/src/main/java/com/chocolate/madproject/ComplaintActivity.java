@@ -1,5 +1,7 @@
 package com.chocolate.madproject;
 
+import static android.content.Intent.getIntent;
+
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -35,17 +37,15 @@ public class ComplaintActivity extends AppCompatActivity {
     Button submitButton;
     DatabaseHelper db;
     String category;
-    HashMap<String, String[]> stateCities = new HashMap<>();
-    HashMap<String, String[]> cityAreas = new HashMap<>();
+    HashMap<String, String[]> stateCities=new HashMap<>();
+    HashMap<String, String[]> cityAreas=new HashMap<>();
     ImageView photoImageView;
     Button photoButton;
 
     Uri selectedImageUri;
 
     ActivityResultLauncher<String> imagePicker =
-            registerForActivityResult(
-                    new ActivityResultContracts.GetContent(),
-                    uri -> {
+            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
                         if (uri != null) {
                             selectedImageUri = uri;
                             photoImageView.setImageURI(uri);
@@ -58,35 +58,33 @@ public class ComplaintActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint);
 
-        categoryTextView = findViewById(R.id.categoryTextView);
+        categoryTextView=findViewById(R.id.categoryTextView);
 
-        issueSpinner = findViewById(R.id.issueSpinner);
+        issueSpinner=findViewById(R.id.issueSpinner);
 
-        stateSpinner = findViewById(R.id.stateSpinner);
-        citySpinner = findViewById(R.id.citySpinner);
-        areaSpinner = findViewById(R.id.areaSpinner);
+        stateSpinner=findViewById(R.id.stateSpinner);
+        citySpinner=findViewById(R.id.citySpinner);
+        areaSpinner=findViewById(R.id.areaSpinner);
 
-        descriptionEditText = findViewById(R.id.descriptionEditText);
+        descriptionEditText=findViewById(R.id.descriptionEditText);
 
-        dateEditText = findViewById(R.id.dateEditText);
+        dateEditText=findViewById(R.id.dateEditText);
 
-        severityGroup = findViewById(R.id.severityGroup);
+        severityGroup=findViewById(R.id.severityGroup);
 
-        submitButton = findViewById(R.id.submitButton);
+        submitButton=findViewById(R.id.submitButton);
 
-        db = new DatabaseHelper(this);
-        photoButton = findViewById(R.id.photoButton);
-        photoImageView = findViewById(R.id.photoImageView);
+        db=new DatabaseHelper(this);
+        photoButton=findViewById(R.id.photoButton);
+        photoImageView=findViewById(R.id.photoImageView);
 
-        category = getIntent().getStringExtra("category");
+        category=getIntent().getStringExtra("category");
 
         if (category == null) {
             category = "Other";
         }
 
-        categoryTextView.setText(
-                "Report: " + category
-        );
+        categoryTextView.setText("Report: " + category);
 
 
         // Issue Types
@@ -99,17 +97,9 @@ public class ComplaintActivity extends AppCompatActivity {
                 "Other"
         };
 
-        ArrayAdapter<String> issueAdapter =
-                new ArrayAdapter<>(
-                        this,
-                        android.R.layout.simple_spinner_item,
-                        issueTypes
-                );
+        ArrayAdapter<String> issueAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, issueTypes);
 
-        issueAdapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
-        );
-
+        issueAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         issueSpinner.setAdapter(issueAdapter);
 
 
@@ -124,17 +114,8 @@ public class ComplaintActivity extends AppCompatActivity {
                 "Karnataka"
         };
 
-        ArrayAdapter<String> stateAdapter =
-                new ArrayAdapter<>(
-                        this,
-                        android.R.layout.simple_spinner_item,
-                        states
-                );
-
-        stateAdapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
-        );
-
+        ArrayAdapter<String> stateAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, states);
+        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         stateSpinner.setAdapter(stateAdapter);
 
 
@@ -303,60 +284,25 @@ public class ComplaintActivity extends AppCompatActivity {
 
 
         // State selection
-        stateSpinner.setOnItemSelectedListener(
-                new android.widget.AdapterView.OnItemSelectedListener() {
-
+        stateSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onItemSelected(
-                            android.widget.AdapterView<?> parent,
-                            View view,
-                            int position,
-                            long id) {
-
-                        String selectedState =
-                                parent.getItemAtPosition(position).toString();
-
-                        String[] cities =
-                                stateCities.get(selectedState);
-
+                    public void onItemSelected(android.widget.AdapterView<?> parent, View view, int position, long id) {
+                        String selectedState=parent.getItemAtPosition(position).toString();
+                        String[] cities=stateCities.get(selectedState);
                         if (cities != null) {
-
-                            ArrayAdapter<String> cityAdapter =
-                                    new ArrayAdapter<>(
-                                            ComplaintActivity.this,
-                                            android.R.layout.simple_spinner_item,
-                                            cities
-                                    );
-
-                            cityAdapter.setDropDownViewResource(
-                                    android.R.layout.simple_spinner_dropdown_item
-                            );
-
+                            ArrayAdapter<String> cityAdapter=new ArrayAdapter<>(ComplaintActivity.this, android.R.layout.simple_spinner_item, cities);
+                            cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             citySpinner.setAdapter(cityAdapter);
 
                         } else {
-
-                            citySpinner.setAdapter(
-                                    new ArrayAdapter<>(
-                                            ComplaintActivity.this,
-                                            android.R.layout.simple_spinner_item,
-                                            new String[]{"Select City"}
-                                    )
-                            );
-
-                            areaSpinner.setAdapter(
-                                    new ArrayAdapter<>(
-                                            ComplaintActivity.this,
-                                            android.R.layout.simple_spinner_item,
-                                            new String[]{"Select Area"}
-                                    )
+                            citySpinner.setAdapter(new ArrayAdapter<>(ComplaintActivity.this, android.R.layout.simple_spinner_item, new String[]{"Select City"}));
+                            areaSpinner.setAdapter(new ArrayAdapter<>(ComplaintActivity.this, android.R.layout.simple_spinner_item, new String[]{"Select Area"})
                             );
                         }
                     }
 
                     @Override
-                    public void onNothingSelected(
-                            android.widget.AdapterView<?> parent) {
+                    public void onNothingSelected(android.widget.AdapterView<?> parent) {
                     }
                 }
         );
@@ -367,48 +313,22 @@ public class ComplaintActivity extends AppCompatActivity {
                 new android.widget.AdapterView.OnItemSelectedListener() {
 
                     @Override
-                    public void onItemSelected(
-                            android.widget.AdapterView<?> parent,
-                            View view,
-                            int position,
-                            long id) {
+                    public void onItemSelected(android.widget.AdapterView<?> parent, View view, int position, long id) {
 
-                        String selectedCity =
-                                parent.getItemAtPosition(position).toString();
+                        String selectedCity=parent.getItemAtPosition(position).toString();
 
-                        String[] areas =
-                                cityAreas.get(selectedCity);
-
+                        String[] areas= cityAreas.get(selectedCity);
                         if (areas != null) {
-
-                            ArrayAdapter<String> areaAdapter =
-                                    new ArrayAdapter<>(
-                                            ComplaintActivity.this,
-                                            android.R.layout.simple_spinner_item,
-                                            areas
-                                    );
-
-                            areaAdapter.setDropDownViewResource(
-                                    android.R.layout.simple_spinner_dropdown_item
-                            );
-
+                            ArrayAdapter<String> areaAdapter=new ArrayAdapter<>(ComplaintActivity.this, android.R.layout.simple_spinner_item, areas);
+                            areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                             areaSpinner.setAdapter(areaAdapter);
-
                         } else {
-
-                            areaSpinner.setAdapter(
-                                    new ArrayAdapter<>(
-                                            ComplaintActivity.this,
-                                            android.R.layout.simple_spinner_item,
-                                            new String[]{"Select Area"}
-                                    )
+                            areaSpinner.setAdapter(new ArrayAdapter<>(ComplaintActivity.this, android.R.layout.simple_spinner_item, new String[]{"Select Area"})
                             );
                         }
                     }
-
                     @Override
-                    public void onNothingSelected(
-                            android.widget.AdapterView<?> parent) {
+                    public void onNothingSelected(android.widget.AdapterView<?> parent) {
                     }
                 }
         );
@@ -420,38 +340,17 @@ public class ComplaintActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        Calendar calendar =
-                                Calendar.getInstance();
+                        Calendar calendar=Calendar.getInstance();
+                        int year=calendar.get(Calendar.YEAR);
+                        int month=calendar.get(Calendar.MONTH);
+                        int day=calendar.get(Calendar.DAY_OF_MONTH);
 
-                        int year =
-                                calendar.get(Calendar.YEAR);
-
-                        int month =
-                                calendar.get(Calendar.MONTH);
-
-                        int day =
-                                calendar.get(Calendar.DAY_OF_MONTH);
-
-                        DatePickerDialog dialog =
-                                new DatePickerDialog(
-                                        ComplaintActivity.this,
-                                        (view,
-                                         selectedYear,
-                                         selectedMonth,
-                                         selectedDay) -> {
-
-                                            String date =
-                                                    selectedDay + "/" +
-                                                            (selectedMonth + 1) + "/" +
-                                                            selectedYear;
-
+                        DatePickerDialog dialog=new DatePickerDialog(ComplaintActivity.this,(view, selectedYear, selectedMonth, selectedDay) -> {
+                                            String date=selectedDay + "/"+(selectedMonth + 1) + "/" + selectedYear;
                                             dateEditText.setText(date);
                                         },
-                                        year,
-                                        month,
-                                        day
+                                        year,month,day
                                 );
-
                         dialog.show();
                     }
                 }
@@ -459,75 +358,37 @@ public class ComplaintActivity extends AppCompatActivity {
 
 
         // Submit
-        submitButton.setOnClickListener(
-                new View.OnClickListener() {
+        submitButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        String issueType =
-                                issueSpinner
-                                        .getSelectedItem()
-                                        .toString();
+                        String issueType=issueSpinner.getSelectedItem().toString();
 
-                        String description =
-                                descriptionEditText
-                                        .getText()
-                                        .toString();
+                        String description=descriptionEditText.getText().toString();
 
-                        int selectedId =
-                                severityGroup
-                                        .getCheckedRadioButtonId();
+                        int selectedId=severityGroup.getCheckedRadioButtonId();
 
-                        String date =
-                                dateEditText
-                                        .getText()
-                                        .toString();
+                        String date=dateEditText.getText().toString();
 
-                        String state =
-                                stateSpinner
-                                        .getSelectedItem()
-                                        .toString();
+                        String state=stateSpinner.getSelectedItem().toString();
 
-                        String city =
-                                citySpinner
-                                        .getSelectedItem()
-                                        .toString();
+                        String city=citySpinner.getSelectedItem().toString();
 
-                        String area =
-                                areaSpinner
-                                        .getSelectedItem()
-                                        .toString();
+                        String area=areaSpinner.getSelectedItem().toString();
 
                         if (description.isEmpty()) {
-
-                            Toast.makeText(
-                                    ComplaintActivity.this,
-                                    "Please enter a description",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-
+                            Toast.makeText(ComplaintActivity.this, "Please enter a description",Toast.LENGTH_SHORT).show();
                             return;
                         }
 
                         if (selectedId == -1) {
-
-                            Toast.makeText(
-                                    ComplaintActivity.this,
-                                    "Please select severity",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-
+                            Toast.makeText(ComplaintActivity.this, "Please select severity",Toast.LENGTH_SHORT).show();
                             return;
                         }
 
                         if (date.isEmpty()) {
 
-                            Toast.makeText(
-                                    ComplaintActivity.this,
-                                    "Please select date",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-
+                            Toast.makeText(ComplaintActivity.this, "Please select date", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
@@ -535,27 +396,18 @@ public class ComplaintActivity extends AppCompatActivity {
                                 || city.equals("Select City")
                                 || area.equals("Select Area")) {
 
-                            Toast.makeText(
-                                    ComplaintActivity.this,
-                                    "Please select location",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-
+                            Toast.makeText(ComplaintActivity.this, "Please select location", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
-                        RadioButton selectedRadio =
-                                findViewById(selectedId);
+                        RadioButton selectedRadio=findViewById(selectedId);
 
-                        String severity =
-                                selectedRadio
-                                        .getText()
-                                        .toString();
+                        String severity=selectedRadio.getText().toString();
 
                         String image = "";
 
                         if (selectedImageUri != null) {
-                            image = selectedImageUri.toString();
+                            image=selectedImageUri.toString();
                         }
 
                         boolean inserted = db.insertComplaint(
@@ -573,26 +425,15 @@ public class ComplaintActivity extends AppCompatActivity {
 
                         if (inserted) {
 
-                            Toast.makeText(
-                                    ComplaintActivity.this,
-                                    "Complaint submitted successfully",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-
+                            Toast.makeText(ComplaintActivity.this, "Complaint submitted successfully", Toast.LENGTH_SHORT).show();
                             finish();
-
                         } else {
 
-                            Toast.makeText(
-                                    ComplaintActivity.this,
-                                    "Failed to submit complaint",
-                                    Toast.LENGTH_SHORT
-                            ).show();
+                            Toast.makeText(ComplaintActivity.this, "Failed to submit complaint",Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
         );
-
 
         photoButton.setOnClickListener(new View.OnClickListener() {
             @Override

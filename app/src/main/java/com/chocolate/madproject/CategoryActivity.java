@@ -20,20 +20,20 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
-        roadsButton = findViewById(R.id.roadsButton);
-        streetLightButton = findViewById(R.id.streetLightButton);
-        electricityButton = findViewById(R.id.electricityButton);
-        wasteButton = findViewById(R.id.wasteButton);
-        waterButton = findViewById(R.id.waterButton);
-        trafficButton = findViewById(R.id.trafficButton);
-        publicSpaceButton = findViewById(R.id.publicSpaceButton);
-        infrastructureButton = findViewById(R.id.infrastructureButton);
-        transportButton = findViewById(R.id.transportButton);
-        educationButton = findViewById(R.id.educationButton);
-        healthcareButton = findViewById(R.id.healthcareButton);
-        civicButton = findViewById(R.id.civicButton);
-        safetyButton = findViewById(R.id.safetyButton);
-        otherButton = findViewById(R.id.otherButton);
+        roadsButton=findViewById(R.id.roadsButton);
+        streetLightButton=findViewById(R.id.streetLightButton);
+        electricityButton=findViewById(R.id.electricityButton);
+        wasteButton=findViewById(R.id.wasteButton);
+        waterButton=findViewById(R.id.waterButton);
+        trafficButton=findViewById(R.id.trafficButton);
+        publicSpaceButton=findViewById(R.id.publicSpaceButton);
+        infrastructureButton=findViewById(R.id.infrastructureButton);
+        transportButton=findViewById(R.id.transportButton);
+        educationButton=findViewById(R.id.educationButton);
+        healthcareButton=findViewById(R.id.healthcareButton);
+        civicButton=findViewById(R.id.civicButton);
+        safetyButton=findViewById(R.id.safetyButton);
+        otherButton=findViewById(R.id.otherButton);
 
         roadsButton.setOnClickListener(v -> openComplaint("Roads & Footpaths"));
         streetLightButton.setOnClickListener(v -> openComplaint("Street Lighting"));
@@ -52,14 +52,8 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void openComplaint(String category) {
-
-        Intent intent = new Intent(
-                CategoryActivity.this,
-                ComplaintActivity.class
-        );
-
+        Intent intent=new Intent(CategoryActivity.this, ComplaintActivity.class);
         intent.putExtra("category", category);
-
         startActivity(intent);
     }
 }

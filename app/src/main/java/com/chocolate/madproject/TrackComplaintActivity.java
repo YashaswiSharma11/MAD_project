@@ -23,55 +23,31 @@ public class TrackComplaintActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_track_complaint);
 
-        complaintIdEditText =
-                findViewById(R.id.complaintIdEditText);
+        complaintIdEditText=findViewById(R.id.complaintIdEditText);
 
-        trackButton =
-                findViewById(R.id.trackButton);
+        trackButton=findViewById(R.id.trackButton);
 
-        resultTextView =
-                findViewById(R.id.resultTextView);
+        resultTextView=findViewById(R.id.resultTextView);
 
-        db = new DatabaseHelper(this);
+        db=new DatabaseHelper(this);
 
         trackButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        String input =
-                                complaintIdEditText
-                                        .getText()
-                                        .toString()
-                                        .trim();
+                        String input=complaintIdEditText.getText().toString().trim();
 
                         if (input.isEmpty()) {
-
-                            Toast.makeText(
-                                    TrackComplaintActivity.this,
-                                    "Please enter complaint ID",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-
+                            Toast.makeText(TrackComplaintActivity.this, "Please enter complaint ID", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
                         int complaintId;
-
-                        try {
-                            complaintId =
-                                    Integer.parseInt(input);
-                        } catch (NumberFormatException e) {
-
-                            Toast.makeText(
-                                    TrackComplaintActivity.this,
-                                    "Enter a valid complaint ID",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-
+                        try {complaintId = Integer.parseInt(input);} catch (NumberFormatException e) {
+                            Toast.makeText(TrackComplaintActivity.this, "Enter a valid complaint ID", Toast.LENGTH_SHORT).show();
                             return;
                         }
-
                         trackComplaint(complaintId);
                     }
                 }
@@ -80,54 +56,24 @@ public class TrackComplaintActivity extends AppCompatActivity {
 
     private void trackComplaint(int complaintId) {
 
-        Cursor cursor =
-                db.getAllComplaints();
-
-        boolean found = false;
-
+        Cursor cursor=db.getAllComplaints();
+        boolean found=false;
         while (cursor.moveToNext()) {
-
-            int id =
-                    cursor.getInt(
-                            cursor.getColumnIndexOrThrow("id")
-                    );
-
+            int id=cursor.getInt(cursor.getColumnIndexOrThrow("id"));
             if (id == complaintId) {
+                String category=cursor.getString(cursor.getColumnIndexOrThrow("category"));
+                String issueType=cursor.getString(cursor.getColumnIndexOrThrow("issue_type"));
+                String status=cursor.getString(cursor.getColumnIndexOrThrow("status"));
 
-                String category =
-                        cursor.getString(
-                                cursor.getColumnIndexOrThrow("category")
-                        );
-
-                String issueType =
-                        cursor.getString(
-                                cursor.getColumnIndexOrThrow("issue_type")
-                        );
-
-                String status =
-                        cursor.getString(
-                                cursor.getColumnIndexOrThrow("status")
-                        );
-
-                resultTextView.setText(
-                        "Complaint ID: CC" + id +
-                                "\n\nCategory: " + category +
-                                "\nIssue: " + issueType +
-                                "\n\nCurrent Status: " + status
-                );
-
+                resultTextView.setText("Complaint ID: CC" + id + "\n\nCategory: " + category + "\nIssue: " + issueType + "\n\nCurrent Status: " + status);
                 found = true;
                 break;
             }
         }
-
         cursor.close();
-
         if (!found) {
 
-            resultTextView.setText(
-                    "Complaint not found."
-            );
+            resultTextView.setText("Complaint not found.");
         }
     }
 }

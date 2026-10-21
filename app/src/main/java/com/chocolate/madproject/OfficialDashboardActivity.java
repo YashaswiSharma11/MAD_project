@@ -27,55 +27,31 @@ public class OfficialDashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_official_dashboard);
 
-        totalTextView = findViewById(R.id.totalTextView);
-        pendingTextView = findViewById(R.id.pendingTextView);
-        progressTextView = findViewById(R.id.progressTextView);
-        resolvedTextView = findViewById(R.id.resolvedTextView);
-        highPriorityTextView = findViewById(R.id.highPriorityTextView);
+        totalTextView=findViewById(R.id.totalTextView);
+        pendingTextView=findViewById(R.id.pendingTextView);
+        progressTextView=findViewById(R.id.progressTextView);
+        resolvedTextView=findViewById(R.id.resolvedTextView);
+        highPriorityTextView=findViewById(R.id.highPriorityTextView);
 
-        viewComplaintsButton =
-                findViewById(R.id.viewComplaintsButton);
+        viewComplaintsButton=findViewById(R.id.viewComplaintsButton);
+        categoriesButton= findViewById(R.id.categoriesButton);
+        analyticsButton=findViewById(R.id.analyticsButton);
 
-        categoriesButton =
-                findViewById(R.id.categoriesButton);
-
-        analyticsButton =
-                findViewById(R.id.analyticsButton);
-
-        db = new DatabaseHelper(this);
-
+        db=new DatabaseHelper(this);
         loadStatistics();
 
-        viewComplaintsButton.setOnClickListener(v -> {
-
-            Intent intent = new Intent(
-                    OfficialDashboardActivity.this,
-                    OfficialComplaintsActivity.class
-            );
-
+        viewComplaintsButton.setOnClickListener(v -> {Intent intent = new Intent(OfficialDashboardActivity.this, OfficialComplaintsActivity.class);
             startActivity(intent);
         });
 
-        categoriesButton.setOnClickListener(v -> {
-
-            Intent intent = new Intent(
-                    OfficialDashboardActivity.this,
-                    LocationAnalysisActivity.class
-            );
-
+        categoriesButton.setOnClickListener(v -> {Intent intent = new Intent(OfficialDashboardActivity.this, LocationAnalysisActivity.class);
             startActivity(intent);
         });
 
         analyticsButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
-                    public void onClick(View v) {
-
-                        Intent intent = new Intent(
-                                OfficialDashboardActivity.this,
-                                AnalyticsActivity.class
-                        );
-
+                    public void onClick(View v) {Intent intent = new Intent(OfficialDashboardActivity.this, AnalyticsActivity.class);
                         startActivity(intent);
                     }
                 }
@@ -84,37 +60,22 @@ public class OfficialDashboardActivity extends AppCompatActivity {
 
     private void loadStatistics() {
 
-        int total = db.getTotalComplaints();
-        int pending = db.getPendingComplaints();
-        int inProgress = db.getInProgressComplaints();
-        int resolved = db.getResolvedComplaints();
-        int highPriority = db.getHighPriorityComplaints();
+        int total=db.getTotalComplaints();
+        int pending=db.getPendingComplaints();
+        int inProgress=db.getInProgressComplaints();
+        int resolved=db.getResolvedComplaints();
+        int highPriority=db.getHighPriorityComplaints();
 
-        totalTextView.setText(
-                "Total Complaints: " + total
-        );
-
-        pendingTextView.setText(
-                "Pending: " + pending
-        );
-
-        progressTextView.setText(
-                "In Progress: " + inProgress
-        );
-
-        resolvedTextView.setText(
-                "Resolved: " + resolved
-        );
-
-        highPriorityTextView.setText(
-                "High Priority: " + highPriority
-        );
+        totalTextView.setText("Total Complaints: " + total);
+        pendingTextView.setText("Pending: " + pending);
+        progressTextView.setText("In Progress: " + inProgress);
+        resolvedTextView.setText("Resolved: " + resolved);
+        highPriorityTextView.setText("High Priority: " + highPriority);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         if (db != null) {
             loadStatistics();
         }

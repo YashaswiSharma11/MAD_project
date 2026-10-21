@@ -27,44 +27,24 @@ public class MyComplaintsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_complaints);
 
-        complaintsListView =
-                findViewById(R.id.complaintsListView);
+        complaintsListView=findViewById(R.id.complaintsListView);
 
-        db = new DatabaseHelper(this);
+        db=new DatabaseHelper(this);
 
-        complaints = new ArrayList<>();
-        complaintIds = new ArrayList<>();
+        complaints=new ArrayList<>();
+        complaintIds=new ArrayList<>();
 
-        adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                complaints
-        );
+        adapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, complaints);
 
         complaintsListView.setAdapter(adapter);
 
         complaintsListView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(
-                            AdapterView<?> parent,
-                            View view,
-                            int position,
-                            long id) {
-
-                        int complaintId =
-                                complaintIds.get(position);
-
-                        Intent intent = new Intent(
-                                MyComplaintsActivity.this,
-                                ComplaintDetailsActivity.class
-                        );
-
-                        intent.putExtra(
-                                "complaint_id",
-                                complaintId
-                        );
-
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                        int complaintId=complaintIds.get(position);
+                        Intent intent=new Intent(MyComplaintsActivity.this, ComplaintDetailsActivity.class);
+                        intent.putExtra("complaint_id", complaintId);
                         startActivity(intent);
                     }
                 }
@@ -74,57 +54,33 @@ public class MyComplaintsActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         loadComplaints();
     }
 
     private void loadComplaints() {
-
         complaints.clear();
         complaintIds.clear();
 
-        Cursor cursor = db.getAllComplaints();
+        Cursor cursor=db.getAllComplaints();
 
         while (cursor.moveToNext()) {
 
-            int id = cursor.getInt(
-                    cursor.getColumnIndexOrThrow("id")
-            );
+            int id=cursor.getInt(cursor.getColumnIndexOrThrow("id"));
 
-            String category = cursor.getString(
-                    cursor.getColumnIndexOrThrow("category")
-            );
+            String category=cursor.getString(cursor.getColumnIndexOrThrow("category"));
 
-            String issueType = cursor.getString(
-                    cursor.getColumnIndexOrThrow("issue_type")
-            );
+            String issueType=cursor.getString(cursor.getColumnIndexOrThrow("issue_type"));
 
-            String severity = cursor.getString(
-                    cursor.getColumnIndexOrThrow("severity")
-            );
+            String severity=cursor.getString(cursor.getColumnIndexOrThrow("severity"));
 
-            String date = cursor.getString(
-                    cursor.getColumnIndexOrThrow("date")
-            );
+            String date=cursor.getString(cursor.getColumnIndexOrThrow("date"));
 
-            String status = cursor.getString(
-                    cursor.getColumnIndexOrThrow("status")
-            );
+            String status=cursor.getString(cursor.getColumnIndexOrThrow("status"));
 
             complaintIds.add(id);
-
-            complaints.add(
-                    "CC" + id +
-                            "\nCategory: " + category +
-                            "\nIssue: " + issueType +
-                            "\nSeverity: " + severity +
-                            "\nDate: " + date +
-                            "\nStatus: " + status
-            );
+            complaints.add("CC" + id + "\nCategory: " + category + "\nIssue: " + issueType + "\nSeverity: " + severity + "\nDate: " + date + "\nStatus: " + status);
         }
-
         cursor.close();
-
         adapter.notifyDataSetChanged();
     }
 }

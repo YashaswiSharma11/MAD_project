@@ -32,26 +32,14 @@ public class OfficialComplaintsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_official_complaints);
 
-        categorySpinner = findViewById(R.id.categorySpinner);
-        officialComplaintsListView =
-                findViewById(R.id.officialComplaintsListView);
-
-        db = new DatabaseHelper(this);
-
-        complaints = new ArrayList<>();
-        complaintIds = new ArrayList<>();
-
-        complaintsAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                complaints
-        );
-
+        categorySpinner=findViewById(R.id.categorySpinner);
+        officialComplaintsListView=findViewById(R.id.officialComplaintsListView);
+        db=new DatabaseHelper(this);
+        complaints=new ArrayList<>();
+        complaintIds=new ArrayList<>();
+        complaintsAdapter=new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, complaints);
         officialComplaintsListView.setAdapter(complaintsAdapter);
-
-        selectedState =
-                getIntent().getStringExtra("selected_state");
-
+        selectedState=getIntent().getStringExtra("selected_state");
         if (selectedState == null) {
             selectedState = "All States";
         }
@@ -74,39 +62,17 @@ public class OfficialComplaintsActivity extends AppCompatActivity {
                 "Other"
         };
 
-        ArrayAdapter<String> categoryAdapter =
-                new ArrayAdapter<>(
-                        this,
-                        android.R.layout.simple_spinner_item,
-                        categories
-                );
-
-        categoryAdapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
-        );
-
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, categories);
+        categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner.setAdapter(categoryAdapter);
-
         loadComplaints("All Categories", selectedState);
-
         categorySpinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener() {
 
                     @Override
-                    public void onItemSelected(
-                            AdapterView<?> parent,
-                            View view,
-                            int position,
-                            long id) {
-
-                        String selectedCategory =
-                                parent.getItemAtPosition(position)
-                                        .toString();
-
-                        loadComplaints(
-                                selectedCategory,
-                                selectedState
-                        );
+                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                        String selectedCategory = parent.getItemAtPosition(position).toString();
+                        loadComplaints(selectedCategory, selectedState);
                     }
 
                     @Override
@@ -120,104 +86,42 @@ public class OfficialComplaintsActivity extends AppCompatActivity {
                 new AdapterView.OnItemClickListener() {
 
                     @Override
-                    public void onItemClick(
-                            AdapterView<?> parent,
-                            View view,
-                            int position,
-                            long id) {
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                        int complaintId =
-                                complaintIds.get(position);
-
-                        Intent intent = new Intent(
-                                OfficialComplaintsActivity.this,
-                                OfficialComplaintDetailsActivity.class
-                        );
-
-                        intent.putExtra(
-                                "complaint_id",
-                                complaintId
-                        );
-
+                        int complaintId=complaintIds.get(position);
+                        Intent intent=newIntent(OfficialComplaintsActivity.this, OfficialComplaintDetailsActivity.class);
+                        intent.putExtra("complaint_id", complaintId);
                         startActivity(intent);
                     }
                 }
         );
     }
 
-    private void loadComplaints(
-            String selectedCategory,
-            String selectedState) {
-
+    private void loadComplaints(String selectedCategory, String selectedState) {
         complaints.clear();
         complaintIds.clear();
 
-        Cursor cursor =
-                db.getAllComplaints();
-
+        Cursor cursor=db.getAllComplaints();
         while (cursor.moveToNext()) {
-
-            int id =
-                    cursor.getInt(
-                            cursor.getColumnIndexOrThrow("id")
-                    );
-
-            String category =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("category")
-                    );
-
-            String state =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("state")
-                    );
-
-            if (!selectedCategory.equals("All Categories")
-                    && !category.equals(selectedCategory)) {
-
+            int id=cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+            String category=cursor.getString(cursor.getColumnIndexOrThrow("category"));
+            String state=cursor.getString(cursor.getColumnIndexOrThrow("state"));
+            if (!selectedCategory.equals("All Categories") && !category.equals(selectedCategory)) {
                 continue;
             }
 
-            if (!selectedState.equals("All States")
-                    && !state.equals(selectedState)) {
-
+            if (!selectedState.equals("All States") && !state.equals(selectedState)) {
                 continue;
             }
 
-            String issueType =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("issue_type")
-                    );
-
-            String severity =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("severity")
-                    );
-
-            String date =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("date")
-                    );
-
-            String status =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("status")
-                    );
-
+            String issueType=cursor.getString(cursor.getColumnIndexOrThrow("issue_type"));
+            String severity=cursor.getString(cursor.getColumnIndexOrThrow("severity"));
+            String date=cursor.getString(cursor.getColumnIndexOrThrow("date"));
+            String status=cursor.getString(cursor.getColumnIndexOrThrow("status"));
             complaintIds.add(id);
-
-            complaints.add(
-                    "CC" + id +
-                            "\nCategory: " + category +
-                            "\nIssue: " + issueType +
-                            "\nSeverity: " + severity +
-                            "\nDate: " + date +
-                            "\nStatus: " + status
-            );
+            complaints.add("CC" + id + "\nCategory: " + category + "\nIssue: " + issueType + "\nSeverity: " + severity + "\nDate: " + date + "\nStatus: " + status);
         }
-
         cursor.close();
-
         complaintsAdapter.notifyDataSetChanged();
     }
 }
