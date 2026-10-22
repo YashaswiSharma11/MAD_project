@@ -16,18 +16,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        citizenButton = findViewById(R.id.citizenButton);
-        officialButton = findViewById(R.id.officialButton);
+        citizenButton=findViewById(R.id.citizenButton);
+        officialButton=findViewById(R.id.officialButton);
 
         citizenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(
-                        MainActivity.this,
-                        CitizenHomeActivity.class
-                );
-
+                Intent intent=new Intent(MainActivity.this,CitizenHomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -35,12 +30,7 @@ public class MainActivity extends AppCompatActivity {
         officialButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(
-                        MainActivity.this,
-                        OfficialDashboardActivity.class
-                );
-
+                Intent intent=new Intent(MainActivity.this, OfficialDashboardActivity.class);
                 startActivity(intent);
             }
         });

@@ -28,27 +28,21 @@ public class AnalyticsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_analytics);
 
-        totalTextView = findViewById(R.id.totalTextView);
-        pendingTextView = findViewById(R.id.pendingTextView);
-        inProgressTextView = findViewById(R.id.inProgressTextView);
-        resolvedTextView = findViewById(R.id.resolvedTextView);
+        totalTextView=findViewById(R.id.totalTextView);
+        pendingTextView=findViewById(R.id.pendingTextView);
+        inProgressTextView=findViewById(R.id.inProgressTextView);
+        resolvedTextView=findViewById(R.id.resolvedTextView);
 
-        lowTextView = findViewById(R.id.lowTextView);
-        mediumTextView = findViewById(R.id.mediumTextView);
-        highTextView = findViewById(R.id.highTextView);
-        criticalTextView = findViewById(R.id.criticalTextView);
+        lowTextView=findViewById(R.id.lowTextView);
+        mediumTextView=findViewById(R.id.mediumTextView);
+        highTextView=findViewById(R.id.highTextView);
+        criticalTextView=findViewById(R.id.criticalTextView);
 
-        categoryStatsTextView =
-                findViewById(R.id.categoryStatsTextView);
+        categoryStatsTextView=findViewById(R.id.categoryStatsTextView);
+        resolutionRateTextView=findViewById(R.id.resolutionRateTextView);
+        locationStatsTextView=findViewById(R.id.locationStatsTextView);
 
-        resolutionRateTextView =
-                findViewById(R.id.resolutionRateTextView);
-
-        locationStatsTextView =
-                findViewById(R.id.locationStatsTextView);
-
-        db = new DatabaseHelper(this);
-
+        db=new DatabaseHelper(this);
         loadAnalytics();
     }
 
@@ -56,50 +50,31 @@ public class AnalyticsActivity extends AppCompatActivity {
 
         // Overall statistics
 
-        int total = db.getTotalComplaints();
-        int pending = db.getPendingComplaints();
-        int inProgress = db.getInProgressComplaints();
-        int resolved = db.getResolvedComplaints();
+        int total=db.getTotalComplaints();
+        int pending=db.getPendingComplaints();
+        int inProgress=db.getInProgressComplaints();
+        int resolved=db.getResolvedComplaints();
 
-        totalTextView.setText(
-                "Total Complaints: " + total
-        );
-
-        pendingTextView.setText(
-                "Pending: " + pending
-        );
-
-        inProgressTextView.setText(
-                "In Progress: " + inProgress
-        );
-
-        resolvedTextView.setText(
-                "Resolved: " + resolved
-        );
+        totalTextView.setText("Total Complaints: " + total);
+        pendingTextView.setText("Pending: " + pending);
+        inProgressTextView.setText("In Progress: " + inProgress);
+        resolvedTextView.setText("Resolved: " + resolved);
 
 
         // Severity statistics
 
-        int low = db.getLowPriorityComplaints();
-        int medium = db.getMediumPriorityComplaints();
-        int high = db.getHighPriorityComplaints();
-        int critical = db.getCriticalPriorityComplaints();
+        int low=db.getLowPriorityComplaints();
+        int medium=db.getMediumPriorityComplaints();
+        int high=db.getHighPriorityComplaints();
+        int critical=db.getCriticalPriorityComplaints();
 
-        lowTextView.setText(
-                "Low: " + low
-        );
+        lowTextView.setText("Low: " + low);
 
-        mediumTextView.setText(
-                "Medium: " + medium
-        );
+        mediumTextView.setText("Medium: " + medium);
 
-        highTextView.setText(
-                "High: " + high
-        );
+        highTextView.setText("High: " + high);
 
-        criticalTextView.setText(
-                "Critical: " + critical
-        );
+        criticalTextView.setText("Critical: " + critical);
 
 
         // Category statistics
@@ -121,37 +96,17 @@ public class AnalyticsActivity extends AppCompatActivity {
                 "Other"
         };
 
-        StringBuilder categoryStats =
-                new StringBuilder();
-
-        for (String category : categories) {
-
-            int count =
-                    db.getCategoryCount(category);
-
-            categoryStats
-                    .append(category)
-                    .append(": ")
-                    .append(count)
-                    .append("\n");
-        }
-
-        categoryStatsTextView.setText(
-                categoryStats.toString()
-        );
+        StringBuilder categoryStats=new StringBuilder();
+        for (String category : categories){
+            int count=db.getCategoryCount(category);
+            categoryStats.append(category).append(": ").append(count).append("\n");}
+        categoryStatsTextView.setText(categoryStats.toString());
 
 
         // Resolution rate
 
-        double rate =
-                db.getResolutionRate();
-
-        resolutionRateTextView.setText(
-                String.format(
-                        "Resolution Rate: %.1f%%",
-                        rate
-                )
-        );
+        double rate=db.getResolutionRate();
+        resolutionRateTextView.setText(String.format("Resolution Rate: %.1f%%", rate));
 
 
         // Location statistics
@@ -165,30 +120,17 @@ public class AnalyticsActivity extends AppCompatActivity {
                 "Delhi"
         };
 
-        StringBuilder locationStats =
-                new StringBuilder();
+        StringBuilder locationStats=new StringBuilder();
 
         for (String state : states) {
-
-            int count =
-                    db.getStateCount(state);
-
-            locationStats
-                    .append(state)
-                    .append(": ")
-                    .append(count)
-                    .append("\n");
-        }
-
-        locationStatsTextView.setText(
-                locationStats.toString()
-        );
+            int count=db.getStateCount(state);
+            locationStats.append(state).append(": ").append(count).append("\n");}
+        locationStatsTextView.setText(locationStats.toString());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
         if (db != null) {
             loadAnalytics();
         }

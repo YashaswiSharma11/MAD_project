@@ -29,8 +29,8 @@ public class LocationAnalysisActivity extends AppCompatActivity {
 
     DatabaseHelper db;
 
-    HashMap<String, String[]> stateCities = new HashMap<>();
-    HashMap<String, String[]> cityAreas = new HashMap<>();
+    HashMap<String, String[]> stateCities=new HashMap<>();
+    HashMap<String, String[]> cityAreas=new HashMap<>();
 
     String[] states = {
             "Select State",
@@ -47,20 +47,19 @@ public class LocationAnalysisActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_analysis);
 
-        stateSpinner = findViewById(R.id.stateSpinner);
+        stateSpinner=findViewById(R.id.stateSpinner);
 
-        totalTextView = findViewById(R.id.totalTextView);
-        pendingTextView = findViewById(R.id.pendingTextView);
-        inProgressTextView = findViewById(R.id.inProgressTextView);
-        resolvedTextView = findViewById(R.id.resolvedTextView);
+        totalTextView=findViewById(R.id.totalTextView);
+        pendingTextView=findViewById(R.id.pendingTextView);
+        inProgressTextView=findViewById(R.id.inProgressTextView);
+        resolvedTextView=findViewById(R.id.resolvedTextView);
 
-        cityStatsTextView = findViewById(R.id.cityStatsTextView);
-        areaStatsTextView = findViewById(R.id.areaStatsTextView);
+        cityStatsTextView=findViewById(R.id.cityStatsTextView);
+        areaStatsTextView=findViewById(R.id.areaStatsTextView);
 
-        viewComplaintsButton = findViewById(R.id.viewComplaintsButton);
+        viewComplaintsButton=findViewById(R.id.viewComplaintsButton);
 
-        db = new DatabaseHelper(this);
-
+        db=new DatabaseHelper(this);
         loadLocationData();
         setupStateSpinner();
 
@@ -68,27 +67,12 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        String selectedState =
-                                stateSpinner
-                                        .getSelectedItem()
-                                        .toString();
-
+                        String selectedState=stateSpinner.getSelectedItem().toString();
                         if (selectedState.equals("Select State")) {
-
                             return;
                         }
-
-                        Intent intent = new Intent(
-                                LocationAnalysisActivity.this,
-                                OfficialComplaintsActivity.class
-                        );
-
-                        intent.putExtra(
-                                "selected_state",
-                                selectedState
-                        );
-
+                        Intent intent=new Intent(LocationAnalysisActivity.this, OfficialComplaintsActivity.class);
+                        intent.putExtra("selected_state", selectedState);
                         startActivity(intent);
                     }
                 }
@@ -96,32 +80,22 @@ public class LocationAnalysisActivity extends AppCompatActivity {
     }
 
     private void loadLocationData() {
-
         // State -> Cities
-
-        stateCities.put(
-                "Madhya Pradesh",
-                new String[]{
+        stateCities.put("Madhya Pradesh", new String[]{
                         "Indore",
                         "Bhopal",
                         "Jabalpur",
                         "Gwalior"
                 }
         );
-
-        stateCities.put(
-                "Maharashtra",
-                new String[]{
+        stateCities.put("Maharashtra", new String[]{
                         "Mumbai",
                         "Pune",
                         "Nagpur",
                         "Nashik"
                 }
         );
-
-        stateCities.put(
-                "Gujarat",
-                new String[]{
+        stateCities.put("Gujarat", new String[]{
                         "Ahmedabad",
                         "Surat",
                         "Vadodara",
@@ -129,9 +103,7 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 }
         );
 
-        stateCities.put(
-                "Rajasthan",
-                new String[]{
+        stateCities.put("Rajasthan", new String[]{
                         "Jaipur",
                         "Jodhpur",
                         "Udaipur",
@@ -139,9 +111,7 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 }
         );
 
-        stateCities.put(
-                "Karnataka",
-                new String[]{
+        stateCities.put("Karnataka", new String[]{
                         "Bengaluru",
                         "Mysuru",
                         "Mangaluru",
@@ -149,9 +119,7 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 }
         );
 
-        stateCities.put(
-                "Delhi",
-                new String[]{
+        stateCities.put("Delhi",new String[]{
                         "New Delhi",
                         "North Delhi",
                         "South Delhi",
@@ -162,9 +130,7 @@ public class LocationAnalysisActivity extends AppCompatActivity {
 
         // City -> Areas
 
-        cityAreas.put(
-                "Indore",
-                new String[]{
+        cityAreas.put("Indore", new String[]{
                         "Vijay Nagar",
                         "Palasia",
                         "Rau",
@@ -173,9 +139,7 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 }
         );
 
-        cityAreas.put(
-                "Bhopal",
-                new String[]{
+        cityAreas.put("Bhopal", new String[]{
                         "MP Nagar",
                         "Arera Colony",
                         "Kolar",
@@ -183,27 +147,21 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 }
         );
 
-        cityAreas.put(
-                "Jabalpur",
-                new String[]{
+        cityAreas.put("Jabalpur", new String[]{
                         "Wright Town",
                         "Napier Town",
                         "Civic Centre"
                 }
         );
 
-        cityAreas.put(
-                "Gwalior",
-                new String[]{
+        cityAreas.put("Gwalior", new String[]{
                         "Lashkar",
                         "Thatipur",
                         "Morar"
                 }
         );
 
-        cityAreas.put(
-                "Mumbai",
-                new String[]{
+        cityAreas.put("Mumbai", new String[]{
                         "Andheri",
                         "Bandra",
                         "Dadar",
@@ -211,9 +169,7 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 }
         );
 
-        cityAreas.put(
-                "Pune",
-                new String[]{
+        cityAreas.put("Pune", new String[]{
                         "Hinjawadi",
                         "Kothrud",
                         "Hadapsar",
@@ -221,27 +177,21 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 }
         );
 
-        cityAreas.put(
-                "Nagpur",
-                new String[]{
+        cityAreas.put("Nagpur", new String[]{
                         "Dharampeth",
                         "Sitabuldi",
                         "Manish Nagar"
                 }
         );
 
-        cityAreas.put(
-                "Nashik",
-                new String[]{
+        cityAreas.put("Nashik", new String[]{
                         "College Road",
                         "Gangapur Road",
                         "Panchavati"
                 }
         );
 
-        cityAreas.put(
-                "Ahmedabad",
-                new String[]{
+        cityAreas.put("Ahmedabad", new String[]{
                         "Navrangpura",
                         "Maninagar",
                         "Satellite",
@@ -249,9 +199,7 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 }
         );
 
-        cityAreas.put(
-                "Surat",
-                new String[]{
+        cityAreas.put("Surat", new String[]{
                         "Adajan",
                         "Vesu",
                         "Katargam",
@@ -259,27 +207,21 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 }
         );
 
-        cityAreas.put(
-                "Vadodara",
-                new String[]{
+        cityAreas.put("Vadodara", new String[]{
                         "Alkapuri",
                         "Manjalpur",
                         "Gotri"
                 }
         );
 
-        cityAreas.put(
-                "Rajkot",
-                new String[]{
+        cityAreas.put("Rajkot", new String[]{
                         "Kalawad Road",
                         "University Road",
                         "Mavdi"
                 }
         );
 
-        cityAreas.put(
-                "Jaipur",
-                new String[]{
+        cityAreas.put("Jaipur", new String[]{
                         "Malviya Nagar",
                         "Vaishali Nagar",
                         "Mansarovar",
@@ -287,9 +229,7 @@ public class LocationAnalysisActivity extends AppCompatActivity {
                 }
         );
 
-        cityAreas.put(
-                "Jodhpur",
-                new String[]{
+        cityAreas.put("Jodhpur", new String[]{
                         "Sardarpura",
                         "Ratanada",
                         "Paota"

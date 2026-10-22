@@ -8,10 +8,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "CivicConnect.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final String DATABASE_NAME="CivicConnect.db";
+    private static final int DATABASE_VERSION=3;
 
-    public static final String TABLE_NAME = "complaints";
+    public static final String TABLE_NAME="complaints";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -32,16 +32,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "area TEXT, " +
                 "image TEXT, " +
                 "status TEXT)";
-
         db.execSQL(query);
     }
 
     @Override
-    public void onUpgrade(
-            SQLiteDatabase db,
-            int oldVersion,
-            int newVersion) {
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
@@ -58,10 +53,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             String area,
             String image,
             String status) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
 
         values.put("category", category);
         values.put("issue_type", issueType);
@@ -74,183 +67,95 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put("image", image);
         values.put("status", status);
 
-        long result = db.insert(
-                TABLE_NAME,
-                null,
-                values
-        );
-
+        long result=db.insert(TABLE_NAME, null, values);
         return result != -1;
     }
 
     // SELECT ALL
     public Cursor getAllComplaints() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        return db.rawQuery(
-                "SELECT * FROM " + TABLE_NAME,
-                null
-        );
+        SQLiteDatabase db=this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
     }
 
     // UPDATE STATUS
-    public boolean updateStatus(
-            int id,
-            String status) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
+    public boolean updateStatus(int id, String status) {
+        SQLiteDatabase db=this.getWritableDatabase();
+        ContentValues values=new ContentValues();
         values.put("status", status);
-
-        int result = db.update(
-                TABLE_NAME,
-                values,
-                "id = ?",
-                new String[]{String.valueOf(id)}
-        );
-
+        int result = db.update(TABLE_NAME, values, "id = ?", new String[]{String.valueOf(id)});
         return result > 0;
     }
 
     // DELETE
     public boolean deleteComplaint(int id) {
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        int result = db.delete(
-                TABLE_NAME,
-                "id = ?",
-                new String[]{String.valueOf(id)}
-        );
-
+        SQLiteDatabase db=this.getWritableDatabase();
+        int result = db.delete(TABLE_NAME, "id = ?", new String[]{String.valueOf(id)});
         return result > 0;
     }
 
     // TOTAL COMPLAINTS
     public int getTotalComplaints() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME,
-                null
-        );
-
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME, null);
         cursor.moveToFirst();
-        int count = cursor.getInt(0);
+        int count=cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 
     // PENDING
     public int getPendingComplaints() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE status = ?",
-                new String[]{"Pending"}
-        );
-
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE status = ?", new String[]{"Pending"});
         cursor.moveToFirst();
-        int count = cursor.getInt(0);
+        int count=cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 
     // IN PROGRESS
     public int getInProgressComplaints() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE status = ?",
-                new String[]{"In Progress"}
-        );
-
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE status = ?", new String[]{"In Progress"});
         cursor.moveToFirst();
-        int count = cursor.getInt(0);
+        int count=cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 
     // RESOLVED
     public int getResolvedComplaints() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE status = ?",
-                new String[]{"Resolved"}
-        );
-
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE status = ?", new String[]{"Resolved"});
         cursor.moveToFirst();
         int count = cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 
     // HIGH PRIORITY
     public int getHighPriorityComplaints() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE severity = ?",
-                new String[]{"High"}
-        );
-
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE severity = ?", new String[]{"High"});
         cursor.moveToFirst();
         int count = cursor.getInt(0);
         cursor.close();
-
         return count;
     }
     // TOTAL COMPLAINTS FOR LOCATION
-    public int getLocationTotal(
-            String state,
-            String city,
-            String area) {
-
+    public int getLocationTotal(String state, String city, String area) {
         SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE state = ? AND city = ? AND area = ?",
-                new String[]{state, city, area}
-        );
-
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE state = ? AND city = ? AND area = ?", new String[]{state, city, area});
         cursor.moveToFirst();
-
         int count = cursor.getInt(0);
-
         cursor.close();
-
         return count;
     }
 
     // PENDING FOR LOCATION
-    public int getLocationPending(
-            String state,
-            String city,
-            String area) {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE state = ? AND city = ? AND area = ?" +
-                        " AND status = ?",
+    public int getLocationPending(String state, String city, String area) {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE state = ? AND city = ? AND area = ?" + " AND status = ?",
                 new String[]{
                         state,
                         city,
@@ -258,28 +163,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "Pending"
                 }
         );
-
         cursor.moveToFirst();
-
-        int count = cursor.getInt(0);
-
+        int count=cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 
     // IN PROGRESS FOR LOCATION
-    public int getLocationInProgress(
-            String state,
-            String city,
-            String area) {
-
+    public int getLocationInProgress(String state, String city, String area) {
         SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE state = ? AND city = ? AND area = ?" +
-                        " AND status = ?",
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE state = ? AND city = ? AND area = ?" + " AND status = ?",
                 new String[]{
                         state,
                         city,
@@ -287,28 +180,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "In Progress"
                 }
         );
-
         cursor.moveToFirst();
-
-        int count = cursor.getInt(0);
-
+        int count=cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 
     // RESOLVED FOR LOCATION
-    public int getLocationResolved(
-            String state,
-            String city,
-            String area) {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE state = ? AND city = ? AND area = ?" +
-                        " AND status = ?",
+    public int getLocationResolved(String state, String city, String area) {
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE state = ? AND city = ? AND area = ?" + " AND status = ?",
                 new String[]{
                         state,
                         city,
@@ -316,115 +197,68 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                         "Resolved"
                 }
         );
-
         cursor.moveToFirst();
-
         int count = cursor.getInt(0);
-
         cursor.close();
-
         return count;
     }
     // LOW PRIORITY
     public int getLowPriorityComplaints() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE severity = ?",
-                new String[]{"Low"}
-        );
-
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE severity = ?", new String[]{"Low"});
         cursor.moveToFirst();
         int count = cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 
     // MEDIUM PRIORITY
     public int getMediumPriorityComplaints() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE severity = ?",
-                new String[]{"Medium"}
-        );
-
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE severity = ?", new String[]{"Medium"});
         cursor.moveToFirst();
         int count = cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 
     // CRITICAL PRIORITY
     public int getCriticalPriorityComplaints() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE severity = ?",
-                new String[]{"Critical"}
-        );
-
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE severity = ?", new String[]{"Critical"});
         cursor.moveToFirst();
         int count = cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 
     // RESOLUTION RATE
     public double getResolutionRate() {
-
-        int total = getTotalComplaints();
-        int resolved = getResolvedComplaints();
-
+        int total=getTotalComplaints();
+        int resolved=getResolvedComplaints();
         if (total == 0) {
             return 0;
         }
-
         return (resolved * 100.0) / total;
     }
 
     // CATEGORY COUNT
     public int getCategoryCount(String category) {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE category = ?",
-                new String[]{category}
-        );
-
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE category = ?", new String[]{category});
         cursor.moveToFirst();
         int count = cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 
     // STATE COUNT
     public int getStateCount(String state) {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.rawQuery(
-                "SELECT COUNT(*) FROM " + TABLE_NAME +
-                        " WHERE state = ?",
-                new String[]{state}
-        );
-
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cursor=db.rawQuery("SELECT COUNT(*) FROM " + TABLE_NAME + " WHERE state = ?", new String[]{state});
         cursor.moveToFirst();
-        int count = cursor.getInt(0);
+        int count=cursor.getInt(0);
         cursor.close();
-
         return count;
     }
 }
