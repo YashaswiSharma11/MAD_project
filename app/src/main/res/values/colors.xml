@@ -1,5 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Primary Brand Palette -->
+    <color name="primary">#0F172A</color>
+    <color name="primary_dark">#020617</color>
+    <color name="primary_container">#1E293B</color>
+
+    <!-- Secondary & Accent Colors -->
+    <color name="secondary">#2563EB</color>
+    <color name="secondary_container">#DBEAFE</color>
+    <color name="tertiary">#7C3AED</color>
+    <color name="tertiary_container">#EDE9FE</color>
+    <color name="accent_cyan">#06B6D4</color>
+
+    <!-- Backgrounds & Surfaces -->
+    <color name="background">#F8FAFC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#F1F5F9</color>
+    <color name="card_stroke">#E2E8F0</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#0F172A</color>
+    <color name="text_secondary">#475569</color>
+    <color name="text_tertiary">#94A3B8</color>
+    <color name="text_on_primary">#FFFFFF</color>
+
+    <!-- Basic Utilities -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+    <!-- Severity Badges -->
+    <color name="severity_low">#0D9488</color>
+    <color name="severity_low_bg">#CCFBF1</color>
+    <color name="severity_medium">#D97706</color>
+    <color name="severity_medium_bg">#FEF3C7</color>
+    <color name="severity_high">#EA580C</color>
+    <color name="severity_high_bg">#FFEDD5</color>
+    <color name="severity_critical">#DC2626</color>
+    <color name="severity_critical_bg">#FEE2E2</color>
+
+    <!-- Status Badges -->
+    <color name="status_pending">#D97706</color>
+    <color name="status_pending_bg">#FEF3C7</color>
+    <color name="status_in_progress">#2563EB</color>
+    <color name="status_in_progress_bg">#DBEAFE</color>
+    <color name="status_resolved">#10B981</color>
+    <color name="status_resolved_bg">#D1FAE5</color>
 </resources>

@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,29 +16,24 @@ public class MyComplaintsActivity extends AppCompatActivity {
     ListView complaintsListView;
     DatabaseHelper db;
 
-    ArrayList<String> complaints;
+    ArrayList<ComplaintItem> complaintList;
     ArrayList<Integer> complaintIds;
 
-    ArrayAdapter<String> adapter;
+    ComplaintAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_complaints);
 
-        complaintsListView =
-                findViewById(R.id.complaintsListView);
+        complaintsListView = findViewById(R.id.complaintsListView);
 
         db = new DatabaseHelper(this);
 
-        complaints = new ArrayList<>();
+        complaintList = new ArrayList<>();
         complaintIds = new ArrayList<>();
 
-        adapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                complaints
-        );
+        adapter = new ComplaintAdapter(this, complaintList);
 
         complaintsListView.setAdapter(adapter);
 
@@ -52,18 +46,14 @@ public class MyComplaintsActivity extends AppCompatActivity {
                             int position,
                             long id) {
 
-                        int complaintId =
-                                complaintIds.get(position);
+                        int complaintId = complaintIds.get(position);
 
                         Intent intent = new Intent(
                                 MyComplaintsActivity.this,
                                 ComplaintDetailsActivity.class
                         );
 
-                        intent.putExtra(
-                                "complaint_id",
-                                complaintId
-                        );
+                        intent.putExtra("complaint_id", complaintId);
 
                         startActivity(intent);
                     }
@@ -80,7 +70,7 @@ public class MyComplaintsActivity extends AppCompatActivity {
 
     private void loadComplaints() {
 
-        complaints.clear();
+        complaintList.clear();
         complaintIds.clear();
 
         Cursor cursor = db.getAllComplaints();
@@ -113,13 +103,15 @@ public class MyComplaintsActivity extends AppCompatActivity {
 
             complaintIds.add(id);
 
-            complaints.add(
-                    "CC" + id +
-                            "\nCategory: " + category +
-                            "\nIssue: " + issueType +
-                            "\nSeverity: " + severity +
-                            "\nDate: " + date +
-                            "\nStatus: " + status
+            complaintList.add(
+                    new ComplaintItem(
+                            id,
+                            category,
+                            issueType,
+                            severity,
+                            date,
+                            status
+                    )
             );
         }
 

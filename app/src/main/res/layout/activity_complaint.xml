@@ -1,206 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@color/background"
     tools:context=".ComplaintActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
 
-        <!-- CATEGORY -->
-
-        <TextView
-            android:id="@+id/categoryTextView"
+        <!-- Header -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Report Issue"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="20dp" />
+            android:orientation="vertical"
+            android:background="@drawable/bg_gradient_header"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="32dp"
+            android:paddingBottom="24dp">
 
-
-        <!-- ISSUE TYPE -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Issue Type"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <Spinner
-            android:id="@+id/issueSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
-
-
-        <!-- DESCRIPTION -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/descriptionEditText"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:hint="Describe the issue"
-            android:gravity="top"
-            android:inputType="textMultiLine"
-            android:layout_marginBottom="16dp" />
-
-
-        <!-- SEVERITY -->
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Severity"
-            android:textSize="17sp"
-            android:textStyle="bold" />
-
-        <RadioGroup
-            android:id="@+id/severityGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
-
-            <RadioButton
-                android:id="@+id/lowRadio"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Low" />
+                android:text="Step 2 of 2"
+                android:textSize="13sp"
+                android:textColor="#93C5FD"
+                android:textStyle="bold" />
 
-            <RadioButton
-                android:id="@+id/mediumRadio"
+            <TextView
+                android:id="@+id/categoryTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Report: Roads &amp; Footpaths"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Form Fields Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Issue Type -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Medium" />
+                android:text="Issue Type"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp" />
 
-            <RadioButton
-                android:id="@+id/highRadio"
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_box"
+                android:padding="4dp"
+                android:layout_marginBottom="16dp">
+
+                <Spinner
+                    android:id="@+id/issueSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+            </FrameLayout>
+
+            <!-- Description -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="High" />
+                android:text="Description"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp" />
 
-            <RadioButton
-                android:id="@+id/criticalRadio"
+            <EditText
+                android:id="@+id/descriptionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:hint="Describe the issue in detail..."
+                android:gravity="top"
+                android:inputType="textMultiLine"
+                android:background="@drawable/bg_input_box"
+                android:padding="14dp"
+                android:textSize="15sp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_tertiary"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Severity -->
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Critical" />
+                android:text="Severity"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp" />
 
-        </RadioGroup>
+            <RadioGroup
+                android:id="@+id/severityGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/bg_input_box"
+                android:padding="8dp"
+                android:layout_marginBottom="16dp">
 
+                <RadioButton
+                    android:id="@+id/lowRadio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Low"
+                    android:textSize="13sp" />
 
-        <!-- DATE -->
+                <RadioButton
+                    android:id="@+id/mediumRadio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Med"
+                    android:textSize="13sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Date"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+                <RadioButton
+                    android:id="@+id/highRadio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="High"
+                    android:textSize="13sp" />
 
-        <EditText
-            android:id="@+id/dateEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Select Date"
-            android:inputType="date"
-            android:focusable="false"
-            android:layout_marginBottom="16dp" />
+                <RadioButton
+                    android:id="@+id/criticalRadio"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Crit"
+                    android:textSize="13sp" />
+            </RadioGroup>
 
+            <!-- Date -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp" />
 
-        <!-- STATE -->
+            <EditText
+                android:id="@+id/dateEditText"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Select Date 📅"
+                android:inputType="date"
+                android:focusable="false"
+                android:background="@drawable/bg_input_box"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textSize="15sp"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_tertiary"
+                android:layout_marginBottom="16dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="State"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+            <!-- State -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="State"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp" />
 
-        <Spinner
-            android:id="@+id/stateSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_box"
+                android:padding="4dp"
+                android:layout_marginBottom="16dp">
 
+                <Spinner
+                    android:id="@+id/stateSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+            </FrameLayout>
 
-        <!-- CITY -->
+            <!-- City -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="City"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="City"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_box"
+                android:padding="4dp"
+                android:layout_marginBottom="16dp">
 
-        <Spinner
-            android:id="@+id/citySpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+                <Spinner
+                    android:id="@+id/citySpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+            </FrameLayout>
 
+            <!-- Area -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Area"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:layout_marginBottom="6dp" />
 
-        <!-- AREA -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_box"
+                android:padding="4dp"
+                android:layout_marginBottom="20dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Area"
-            android:textSize="17sp"
-            android:textStyle="bold" />
+                <Spinner
+                    android:id="@+id/areaSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" />
+            </FrameLayout>
 
-        <Spinner
-            android:id="@+id/areaSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+            <!-- Photo Upload Area -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/photoButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TAKE PHOTO"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:icon="@drawable/ic_camera"
+                app:iconGravity="textStart"
+                app:cornerRadius="12dp"
+                android:layout_marginBottom="12dp" />
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/card_stroke"
+                android:layout_marginBottom="20dp">
 
-        <!-- PHOTO -->
+                <ImageView
+                    android:id="@+id/photoImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:contentDescription="Complaint photo preview"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone" />
+            </com.google.android.material.card.MaterialCardView>
 
-        <Button
-            android:id="@+id/photoButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ADD PHOTO"
-            android:layout_marginBottom="10dp" />
+            <!-- Submit Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/submitButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SUBMIT COMPLAINT"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                app:cornerRadius="14dp"
+                android:backgroundTint="@color/secondary"
+                android:layout_marginBottom="24dp" />
 
-        <ImageView
-            android:id="@+id/photoImageView"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:contentDescription="Complaint photo"
-            android:scaleType="centerInside"
-            android:visibility="gone"
-            android:layout_marginBottom="16dp" />
-
-
-        <!-- SUBMIT -->
-
-        <Button
-            android:id="@+id/submitButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="SUBMIT COMPLAINT"
-            android:textSize="18sp"
-            android:layout_marginBottom="20dp" />
-
+        </LinearLayout>
     </LinearLayout>
-
 </ScrollView>

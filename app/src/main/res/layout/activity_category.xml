@@ -1,111 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background"
     tools:context=".CategoryActivity">
 
+    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:background="@drawable/bg_gradient_header"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:paddingTop="36dp"
+        android:paddingBottom="24dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="SELECT ISSUE CATEGORY"
-            android:textSize="25sp"
+            android:text="Step 1 of 2"
+            android:textSize="13sp"
+            android:textColor="#93C5FD"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Issue Category"
+            android:textSize="26sp"
             android:textStyle="bold"
-            android:layout_marginBottom="25dp" />
-
-        <Button
-            android:id="@+id/roadsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Roads &amp; Footpaths" />
-
-        <Button
-            android:id="@+id/streetLightButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Street Lighting" />
-
-        <Button
-            android:id="@+id/electricityButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Electricity &amp; Power" />
-
-        <Button
-            android:id="@+id/wasteButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Waste &amp; Sanitation" />
-
-        <Button
-            android:id="@+id/waterButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Water Supply &amp; Drainage" />
-
-        <Button
-            android:id="@+id/trafficButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Traffic &amp; Road Safety" />
-
-        <Button
-            android:id="@+id/publicSpaceButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Public Spaces &amp; Facilities" />
-
-        <Button
-            android:id="@+id/infrastructureButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Public Infrastructure" />
-
-        <Button
-            android:id="@+id/transportButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Public Transport" />
-
-        <Button
-            android:id="@+id/educationButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Education" />
-
-        <Button
-            android:id="@+id/healthcareButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Healthcare" />
-
-        <Button
-            android:id="@+id/civicButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Civic Utilities &amp; Information" />
-
-        <Button
-            android:id="@+id/safetyButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Public Safety Hazards" />
-
-        <Button
-            android:id="@+id/otherButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Other" />
-
+            android:textColor="@color/white"
+            android:layout_marginTop="4dp" />
     </LinearLayout>
 
-</ScrollView>
+    <!-- Categories List -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/roadsButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🛣️  Roads &amp; Footpaths"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/streetLightButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="💡  Street Lighting"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/electricityButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⚡  Electricity &amp; Power"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/wasteButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🗑️  Waste &amp; Sanitation"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/waterButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🚰  Water Supply &amp; Drainage"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/trafficButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🚦  Traffic &amp; Road Safety"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/publicSpaceButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🏞️  Public Spaces &amp; Facilities"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/infrastructureButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🏗️  Public Infrastructure"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/transportButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🚌  Public Transport"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/educationButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🎓  Education"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/healthcareButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="🏥  Healthcare"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/civicButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ℹ️  Civic Utilities &amp; Information"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/safetyButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⚠️  Public Safety Hazards"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="10dp"
+                app:cornerRadius="14dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/otherButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="📌  Other"
+                android:textSize="16sp"
+                android:gravity="start|center_vertical"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:layout_marginBottom="20dp"
+                app:cornerRadius="14dp" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

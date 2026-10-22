@@ -1,97 +1,314 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/background"
     tools:context=".OfficialDashboardActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:orientation="vertical">
 
-        <TextView
+        <!-- Header -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="CIVICCONNECT"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="5dp" />
+            android:orientation="vertical"
+            android:background="@drawable/bg_gradient_header"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:paddingTop="36dp"
+            android:paddingBottom="28dp">
 
-        <TextView
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CIVICCONNECT OFFICER PORTAL"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="#93C5FD"
+                android:letterSpacing="0.08" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Official Dashboard"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="OFFICIAL DASHBOARD"
-            android:textSize="20sp"
-            android:gravity="center"
-            android:layout_marginBottom="25dp" />
+            android:orientation="vertical"
+            android:padding="20dp">
 
-        <TextView
-            android:id="@+id/totalTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Total Complaints: 124"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:padding="15dp" />
+            <!-- Stats Grid Row 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
 
-        <TextView
-            android:id="@+id/pendingTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Pending: 32"
-            android:textSize="20sp"
-            android:padding="15dp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface"
+                    app:strokeColor="@color/card_stroke"
+                    app:strokeWidth="1dp">
 
-        <TextView
-            android:id="@+id/progressTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="In Progress: 41"
-            android:textSize="20sp"
-            android:padding="15dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/resolvedTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Resolved: 51"
-            android:textSize="20sp"
-            android:padding="15dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total"
+                            android:textSize="13sp"
+                            android:textColor="@color/text_secondary" />
 
-        <TextView
-            android:id="@+id/highPriorityTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="High Priority: 17"
-            android:textSize="20sp"
-            android:padding="15dp"
-            android:layout_marginBottom="20dp" />
+                        <TextView
+                            android:id="@+id/totalTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="124"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/primary"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
 
-        <Button
-            android:id="@+id/viewComplaintsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="VIEW ALL COMPLAINTS"
-            android:layout_marginBottom="12dp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/status_pending_bg"
+                    app:strokeColor="@color/status_pending"
+                    app:strokeWidth="1dp">
 
-        <Button
-            android:id="@+id/categoriesButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="LOCATION ANALYSIS"
-            android:layout_marginBottom="12dp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
 
-        <Button
-            android:id="@+id/analyticsButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="ANALYTICS" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pending"
+                            android:textSize="13sp"
+                            android:textColor="@color/status_pending"
+                            android:textStyle="bold" />
 
+                        <TextView
+                            android:id="@+id/pendingTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="32"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/status_pending"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- Stats Grid Row 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/status_in_progress_bg"
+                    app:strokeColor="@color/status_in_progress"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="In Progress"
+                            android:textSize="13sp"
+                            android:textColor="@color/status_in_progress"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/progressTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="41"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/status_in_progress"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/status_resolved_bg"
+                    app:strokeColor="@color/status_resolved"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Resolved"
+                            android:textSize="13sp"
+                            android:textColor="@color/status_resolved"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/resolvedTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="51"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/status_resolved"
+                            android:layout_marginTop="4dp" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+
+            <!-- High Priority Card Banner -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/severity_critical_bg"
+                app:strokeColor="@color/severity_critical"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="18dp"
+                    android:gravity="center_vertical">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Critical &amp; High Priority"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/severity_critical" />
+
+                        <TextView
+                            android:id="@+id/highPriorityTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="High Priority: 17"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/severity_critical"
+                            android:layout_marginTop="2dp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="⚠️"
+                        android:textSize="28sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Actions -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/viewComplaintsButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VIEW ALL COMPLAINTS"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                app:icon="@drawable/ic_complaint_list"
+                app:iconGravity="textStart"
+                app:cornerRadius="14dp"
+                android:backgroundTint="@color/secondary"
+                android:layout_marginBottom="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/categoriesButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="LOCATION ANALYSIS"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                app:icon="@drawable/ic_location"
+                app:iconGravity="textStart"
+                app:cornerRadius="14dp"
+                android:layout_marginBottom="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/analyticsButton"
+                style="@style/Widget.Material3.Button.TonalButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ANALYTICS"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                app:icon="@drawable/ic_analytics"
+                app:iconGravity="textStart"
+                app:cornerRadius="14dp" />
+
+        </LinearLayout>
     </LinearLayout>
-
 </ScrollView>

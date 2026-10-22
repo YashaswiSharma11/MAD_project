@@ -20,10 +20,10 @@ public class OfficialComplaintsActivity extends AppCompatActivity {
 
     DatabaseHelper db;
 
-    ArrayList<String> complaints;
+    ArrayList<ComplaintItem> complaintList;
     ArrayList<Integer> complaintIds;
 
-    ArrayAdapter<String> complaintsAdapter;
+    ComplaintAdapter complaintsAdapter;
 
     String selectedState;
 
@@ -33,24 +33,18 @@ public class OfficialComplaintsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_official_complaints);
 
         categorySpinner = findViewById(R.id.categorySpinner);
-        officialComplaintsListView =
-                findViewById(R.id.officialComplaintsListView);
+        officialComplaintsListView = findViewById(R.id.officialComplaintsListView);
 
         db = new DatabaseHelper(this);
 
-        complaints = new ArrayList<>();
+        complaintList = new ArrayList<>();
         complaintIds = new ArrayList<>();
 
-        complaintsAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                complaints
-        );
+        complaintsAdapter = new ComplaintAdapter(this, complaintList);
 
         officialComplaintsListView.setAdapter(complaintsAdapter);
 
-        selectedState =
-                getIntent().getStringExtra("selected_state");
+        selectedState = getIntent().getStringExtra("selected_state");
 
         if (selectedState == null) {
             selectedState = "All States";
@@ -74,12 +68,11 @@ public class OfficialComplaintsActivity extends AppCompatActivity {
                 "Other"
         };
 
-        ArrayAdapter<String> categoryAdapter =
-                new ArrayAdapter<>(
-                        this,
-                        android.R.layout.simple_spinner_item,
-                        categories
-                );
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                categories
+        );
 
         categoryAdapter.setDropDownViewResource(
                 android.R.layout.simple_spinner_dropdown_item
@@ -100,18 +93,13 @@ public class OfficialComplaintsActivity extends AppCompatActivity {
                             long id) {
 
                         String selectedCategory =
-                                parent.getItemAtPosition(position)
-                                        .toString();
+                                parent.getItemAtPosition(position).toString();
 
-                        loadComplaints(
-                                selectedCategory,
-                                selectedState
-                        );
+                        loadComplaints(selectedCategory, selectedState);
                     }
 
                     @Override
-                    public void onNothingSelected(
-                            AdapterView<?> parent) {
+                    public void onNothingSelected(AdapterView<?> parent) {
                     }
                 }
         );
@@ -126,18 +114,14 @@ public class OfficialComplaintsActivity extends AppCompatActivity {
                             int position,
                             long id) {
 
-                        int complaintId =
-                                complaintIds.get(position);
+                        int complaintId = complaintIds.get(position);
 
                         Intent intent = new Intent(
                                 OfficialComplaintsActivity.this,
                                 OfficialComplaintDetailsActivity.class
                         );
 
-                        intent.putExtra(
-                                "complaint_id",
-                                complaintId
-                        );
+                        intent.putExtra("complaint_id", complaintId);
 
                         startActivity(intent);
                     }
@@ -149,70 +133,62 @@ public class OfficialComplaintsActivity extends AppCompatActivity {
             String selectedCategory,
             String selectedState) {
 
-        complaints.clear();
+        complaintList.clear();
         complaintIds.clear();
 
-        Cursor cursor =
-                db.getAllComplaints();
+        Cursor cursor = db.getAllComplaints();
 
         while (cursor.moveToNext()) {
 
-            int id =
-                    cursor.getInt(
-                            cursor.getColumnIndexOrThrow("id")
-                    );
+            int id = cursor.getInt(
+                    cursor.getColumnIndexOrThrow("id")
+            );
 
-            String category =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("category")
-                    );
+            String category = cursor.getString(
+                    cursor.getColumnIndexOrThrow("category")
+            );
 
-            String state =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("state")
-                    );
+            String state = cursor.getString(
+                    cursor.getColumnIndexOrThrow("state")
+            );
 
             if (!selectedCategory.equals("All Categories")
                     && !category.equals(selectedCategory)) {
-
                 continue;
             }
 
             if (!selectedState.equals("All States")
                     && !state.equals(selectedState)) {
-
                 continue;
             }
 
-            String issueType =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("issue_type")
-                    );
+            String issueType = cursor.getString(
+                    cursor.getColumnIndexOrThrow("issue_type")
+            );
 
-            String severity =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("severity")
-                    );
+            String severity = cursor.getString(
+                    cursor.getColumnIndexOrThrow("severity")
+            );
 
-            String date =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("date")
-                    );
+            String date = cursor.getString(
+                    cursor.getColumnIndexOrThrow("date")
+            );
 
-            String status =
-                    cursor.getString(
-                            cursor.getColumnIndexOrThrow("status")
-                    );
+            String status = cursor.getString(
+                    cursor.getColumnIndexOrThrow("status")
+            );
 
             complaintIds.add(id);
 
-            complaints.add(
-                    "CC" + id +
-                            "\nCategory: " + category +
-                            "\nIssue: " + issueType +
-                            "\nSeverity: " + severity +
-                            "\nDate: " + date +
-                            "\nStatus: " + status
+            complaintList.add(
+                    new ComplaintItem(
+                            id,
+                            category,
+                            issueType,
+                            severity,
+                            date,
+                            status
+                    )
             );
         }
 
